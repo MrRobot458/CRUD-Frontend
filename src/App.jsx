@@ -17,13 +17,13 @@ const App = () => {
   return (
     <div>
       <NavBar />
-        <Routes>
-          <Route path = "/" element = {<LandingPage />} />
-          <Route path = "/campuses" element = {<AllCampuses />} />
-          <Route path = "/campuses/:campusId" element = {< CampusDetails/>} />
-          <Route path = "/students" element = {< AllStudents />} />
-          <Route path = "/students/:studentId" element = {< StudentDetails/>} />
-        </Routes>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/campuses" element={<AllCampuses />} />
+        <Route path="/campuses/:campusId" element={< CampusDetails />} />
+        <Route path="/students" element={< AllStudents />} />
+        <Route path="/students/:studentId" element={< StudentDetails />} />
+      </Routes>
     </div>
   );
 };
@@ -38,3 +38,5 @@ root.render(
     <App />
   </Router>
 );
+
+// For branch emmanuel-rivas
