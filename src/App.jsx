@@ -1,19 +1,29 @@
+//import libraries
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter as Router, Routes, Route } from "react-router";
+import axios from "axios";
+//import css
 import "./AppStyles.css";
+//import components
 import NavBar from "./components/NavBar";
-import { BrowserRouter as Router, Routes } from "react-router";
+import LandingPage from "./components/LandingPage";
+import AllCampuses from "./components/AllCampuses";
+import CampusDetails from "./components/CampusDetails";
+import AllStudents from "./components/AllStudents";
+import StudentDetails from "./components/StudentDetails";
 
 const App = () => {
   return (
     <div>
       <NavBar />
-      <div className="app">
-        <h1>Hello React!</h1>
-        <img className="react-logo" src="/react-logo.svg" alt="React Logo" />
-
-        <Routes>{/* Currently, we don't have any routes defined */}</Routes>
-      </div>
+        <Routes>
+          <Route path = "/" element = {<LandingPage />} />
+          <Route path = "/campuses" element = {<AllCampuses />} />
+          <Route path = "/campuses/:campusId" element = {< CampusDetails/>} />
+          <Route path = "/students" element = {< AllStudents />} />
+          <Route path = "/students/:studentId" element = {< StudentDetails/>} />
+        </Routes>
     </div>
   );
 };
