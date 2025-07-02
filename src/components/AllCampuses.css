@@ -1,0 +1,27 @@
+.all-campuses-page {
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.all-campuses-bubble {
+  background: rgba(255, 255, 255, 0.1);  
+  backdrop-filter: blur(10px);          
+  -webkit-backdrop-filter: blur(10px);  
+  border-radius: 20px;                  
+  padding: 10px 12px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.25); 
+  max-width: 90%;
+  text-align: center;
+  color: white;                         
+}
+
+.all-campuses-title {
+  color: #fff;
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+}

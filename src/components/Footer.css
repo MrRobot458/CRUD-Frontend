@@ -1,0 +1,27 @@
+.footer {
+  width: 100%;
+  padding: 5px 5px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: white;
+  font-size: 0.9rem;
+  position: sticky;
+  bottom: 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
+  border-top: 0.5px solid rgba(255, 255, 255, 0.2);
+  z-index: 100;
+}
+
+.footer-link {
+  color: white;
+  text-decoration: none;
+  margin: 0 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #ddd;
+  text-decoration: underline;
+}

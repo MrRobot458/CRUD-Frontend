@@ -1,0 +1,58 @@
+.landing-page {
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-bubble {
+  background: rgba(255, 255, 255, 0.1);  
+  backdrop-filter: blur(10px);          
+  -webkit-backdrop-filter: blur(10px);  
+  border-radius: 20px;                  
+  padding: 10px 12px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.25); 
+  max-width: 90%;
+  text-align: center;
+  color: white;                         
+}
+
+.landing-title {
+  color: #fff;
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+
+.transparent-bubble {
+  width: 600px;
+  height: 300px;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)),
+    url('https://www.challies.com/media/2022/08/AdobeStock_243388799-1.jpeg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: 3px solid rgba(255, 255, 255, 0.3);    
+  border-left: 3px solid rgba(255, 255, 255, 0.3);   
+  border-right: 3px solid rgba(255, 255, 255, 0.3);  
+  border-bottom: 3px solid rgba(255, 255, 255, 0.3);;  
+  border-radius: 15px;
+  padding: 1rem 2rem;
+  color: white;
+  margin: 100px auto 1rem auto; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
+
+
