@@ -20,9 +20,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/campuses" element={<AllCampuses />} />
-        <Route path="/campuses/:campusId" element={< CampusDetails />} />
-        <Route path="/students" element={< AllStudents />} />
-        <Route path="/students/:studentId" element={< StudentDetails />} />
+        <Route path="/campuses/:campusId" element={<CampusDetails />} />
+        <Route path="/students" element={<AllStudents />} />
+        <Route path="/students/:studentId" element={<StudentDetails />} />
       </Routes>
     </div>
   );
@@ -38,5 +38,3 @@ root.render(
     <App />
   </Router>
 );
-
-// For branch emmanuel-rivas
