@@ -12,7 +12,7 @@ const LandingPage = () => {
 
             <div>
                  <p className="transparent-bubble">
-                    This is some text inside a nice transparent bubble.
+                    must replace this text for something that matches the site.
                 </p>
             </div>
         </div>
