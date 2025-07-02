@@ -5,7 +5,7 @@ import { NavLink } from "react-router";
 const NavBar = () => {
   return (
     <nav className="navbar">
-      <NavLink to = "/">🏠</NavLink>
+      <NavLink to = "/">Home</NavLink>
       <NavLink to = "/campuses">All Campuses</NavLink>
       <NavLink to ="/students">All Students</NavLink>
     </nav>

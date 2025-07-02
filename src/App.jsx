@@ -1,5 +1,6 @@
 //import libraries
 import React from "react";
+import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 import axios from "axios";
@@ -12,17 +13,51 @@ import AllCampuses from "./components/AllCampuses";
 import CampusDetails from "./components/CampusDetails";
 import AllStudents from "./components/AllStudents";
 import StudentDetails from "./components/StudentDetails";
+import AddStudent from "./components/AddStudent";
 
 const App = () => {
+
+  const [students, setStudents] = useState([]);
+
+  async function fetchAllStudents() {
+    try {
+      const response = await axios.get("https://crud-backend-gilt.vercel.app/api/students/");
+      setStudents(response.data);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchAllStudents();
+  }, []);
+
+  const [campuses, setCampuses] = useState([]);
+
+  async function fetchAllCampuses() {
+    try{
+      const response = await axios.get("https://crud-backend-gilt.vercel.app/api/campuses");
+      setCampuses(response.data);
+    }catch (error){
+      console.error("Error fetching tasks:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchAllCampuses();
+  }, []);
+  
+
   return (
     <div>
       <NavBar />
         <Routes>
           <Route path = "/" element = {<LandingPage />} />
-          <Route path = "/campuses" element = {<AllCampuses />} />
+          <Route path = "/campuses" element = {<AllCampuses campuses={campuses} fetchAllCampuses={fetchAllCampuses} students={students} />} />
           <Route path = "/campuses/:campusId" element = {< CampusDetails/>} />
-          <Route path = "/students" element = {< AllStudents />} />
+          <Route path = "/students" element = {< AllStudents students={students} fetchAllStudents={fetchAllStudents}/>} />
           <Route path = "/students/:studentId" element = {< StudentDetails/>} />
+          <Route path = "/add-student" element = {<AddStudent />} />
         </Routes>
     </div>
   );

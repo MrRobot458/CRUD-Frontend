@@ -6,8 +6,10 @@
 }
 
 body {
-  background-color: #fff;
+  background-image: url('https://www.educationunlimited.com/blog/wp-content/uploads/2019/08/Webp.net-compress-image.jpg');
+  
 }
+
 
 .title {
   color: #ffffff;
@@ -25,17 +27,17 @@ body {
   min-height: 100vh;
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
 }
 
-.react-logo {
-  width: 100px;
-  height: 100px;
-  animation: spin 15s linear infinite;
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+.content {
+  flex: 1; 
 }
