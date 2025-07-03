@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, useState } from "react-router";
-import "./CampusDetailsStles.css"
+import "./CampusDetailsStyles.css"
 
 /*
 - [ ] The campus's name, image, address and description
