@@ -1,20 +1,21 @@
 import React from "react";
 import axios from "axios";
-import "./StudentCardStyles.css";
+import "./StudentInCampusCardStyles.css";
 import { Link } from "react-router";
 
 const StudentCard = ({ student, fetchAllStudents }) => {
   const handleDeleteStudent = async () => {
-    const confirmed = window.confirm("Are you sure you want to delete this student?");
+    const confirmed = window.confirm("Are you sure you want to remove this student from the campus?");
     if (!confirmed) return;
     try {
-      await axios.delete(
-        `https://crud-backend-gilt.vercel.app/api/students/${student.id}`
-      );
-      fetchAllStudents();
-    } catch (error) {
-      console.error("Error deleting student:", error);
-    }
+      await axios.patch(
+      `https://crud-backend-gilt.vercel.app/api/students/${student.id}`,
+      { campusId: null }
+    );
+    fetchAllStudents();
+  } catch (error) {
+    console.error("Error removing student from campus:", error);
+  }
   };
 
   return (
@@ -46,7 +47,7 @@ const StudentCard = ({ student, fetchAllStudents }) => {
           )}
       </div>
       <div className = "delete-student">
-        <p onClick={handleDeleteStudent}>🗑️</p>
+        <p onClick={handleDeleteStudent}>❌</p>
       </div>
     </div>
   );

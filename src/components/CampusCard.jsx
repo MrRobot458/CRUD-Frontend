@@ -18,14 +18,14 @@ const CampusCard = ({ campus, fetchAllCampuses, students }) => {
   };
 
   const studentCounter = (campus, students) => {
-  let studentCount = 0;
-  for (let i = 0; i < students.length; i++) {
-    if (students[i].campusId === campus.id) {
-      studentCount += 1;
+    let studentCount = 0;
+    for (let i = 0; i < students.length; i++) {
+      if (students[i].campusId === campus.id) {
+        studentCount += 1;
+      }
     }
-  }
-  return studentCount;
-};
+    return studentCount;
+  };
 
   return (
     <div className={"campus-card"}>
@@ -40,9 +40,7 @@ const CampusCard = ({ campus, fetchAllCampuses, students }) => {
         />
       </div>
       <div>
-        <p>
-           {studentCounter(campus,students)} Students
-        </p>
+        <p>{studentCounter(campus, students)} Students</p>
       </div>
       <div className="campus-card-header-buttons">
         <Link to={`/campuses/${campus.id}`}>

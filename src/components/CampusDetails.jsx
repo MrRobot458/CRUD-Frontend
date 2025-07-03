@@ -1,34 +1,65 @@
 import React from "react";
-import { useParams, useState } from "react-router";
-import "./CampusDetailsStyles.css"
+import { useState, useEffect } from "react";
+import { useParams } from "react-router";
+import axios from "axios";
+import "./CampusDetailsStyles.css";
+import StudentInCampusCard from "./StudentInCampusCard";
 
-/*
-- [ ] The campus's name, image, address and description
-- [ ] A list of the names of all students in that campus (or a helpful message if it doesn't have any students)
-- [ ] Display the appropriate campus's info when the url matches `/campuses/:campusId`
-- [ ] Clicking on a campus from the all-campuses view should navigate to show that campus in the single-campus view
-- [ ] Clicking on the name of a student in the single-campus view should navigate to show that student in the single-student view
-- [ ] Clicking on the name of a campus in the single-student view should navigate to show that campus in the single-campus view
-*/ 
+const CampusDetails = () => {
+  const { campusId } = useParams();
+  const [campus, setCampus] = useState(null);
 
-const CampusDetails = ({ campuses, fetchAllCampuses, students }) => {
+  const fetchCampus = async () => {
+    try {
+      const response = await axios.get(
+        `https://crud-backend-gilt.vercel.app/api/campuses/${campusId}`
+      );
+      setCampus(response.data);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+    }
+  };
 
+  useEffect(() => {
+    fetchCampus();
+  }, [campusId]);
 
+  if (!campus) return <div>Loading...</div>;
 
-    return (
-        <div>
+  return (
+    <div className="center-container">
+      <div className="campus-details-body">
         <div className="heading">
-            <h1>Campus Details</h1>
+          <h1>Campus Details</h1>
         </div>
-        <div>
-            <img
+        <div className="campus-details">
+          <img
             className="campus-image"
             src={campus.imageUrl}
             alt={campus.name}
-            />
+          />
+          <h2>{campus.name}</h2>
+          <p>{campus.address}</p>
+          <p>{campus.description}</p>
         </div>
         </div>
-    )
-}
+        <div className="students">
+            <h2>Attending Students</h2>
+          {campus.students.length > 0 ? (
+            campus.students.map((student) => (
+              <StudentInCampusCard
+                key={campus.students.id}
+                student={student}
+                fetchAllStudents={fetchCampus}
+                students={campus.students}
+              />
+            ))
+          ) : (
+            <p>It looks like no students have been added to this campus yet!</p>
+          )}
+        </div>
+      </div>
+  );
+};
 
 export default CampusDetails;

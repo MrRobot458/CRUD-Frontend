@@ -14,6 +14,7 @@ import CampusDetails from "./components/CampusDetails";
 import AllStudents from "./components/AllStudents";
 import StudentDetails from "./components/StudentDetails";
 import AddStudent from "./components/AddStudent";
+import EditStudent from "./components/EditStudent";
 
 const App = () => {
 
@@ -58,6 +59,7 @@ const App = () => {
           <Route path = "/students" element = {< AllStudents students={students} fetchAllStudents={fetchAllStudents}/>} />
           <Route path = "/students/:studentId" element = {< StudentDetails/>} />
           <Route path = "/add-student" element = {<AddStudent />} />
+          <Route path = "/students/:studentId/edit" element = {<EditStudent/>} />
         </Routes>
     </div>
   );
