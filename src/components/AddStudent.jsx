@@ -39,7 +39,7 @@ export default function AddStudent() {
       });
     } catch (error) {
       console.error(error.message);
-      setErrors([...errors, "Please make sure you input a proper email"]);
+      setErrors([...errors, "Add student failed! Please make sure you input a proper email"]);
     }
   }
 
