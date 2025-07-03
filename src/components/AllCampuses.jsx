@@ -1,13 +1,16 @@
 import React from "react";
-import "./AllCampuses.css"; 
+import CampusCard from "./CampusCard";
 
-const AllCampuses = () => {
+const AllCampuses = ({ campuses, fetchAllCampuses, students }) => {
   return (
-    <div className="all-campuses-page">
-      <div className="all-campuses-bubble">
-        <h1 className="all-campuses-title">Campuses</h1>
-        <p>Browse the list of campuses available on our network.</p>
-      </div>
+    <div className="campus-grid">
+      {campuses.length > 0 ? (
+        campuses.map((campus) => (
+          <CampusCard key={campus.id} campus={campus} fetchAllCampuses={fetchAllCampuses} students={students} />
+        ))
+      ) : (
+        <p>No Campuses found</p>
+      )}
     </div>
   );
 };

@@ -1,13 +1,16 @@
 import React from "react";
-import "./AllStudents.css"; // import your CSS
+import StudentCard from "./StudentCard";
 
-const AllStudents = () => {
+const AllStudents = ({ students, fetchAllStudents }) => {
   return (
-    <div className="all-students-page">
-      <div className="all-students-bubble">
-        <h1 className="all-students-title">Students</h1>
-        <p>Meet our students and learn more about their journeys.</p>
-      </div>
+    <div className="student-grid">
+      {students.length > 0 ? (
+        students.map((student) => (
+          <StudentCard key={student.id} student={student} fetchAllStudents={fetchAllStudents}  />
+        ))
+      ) : (
+        <p>No Students found</p>
+      )}
     </div>
   );
 };
