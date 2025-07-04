@@ -1,8 +1,5 @@
 .footer {
-  position: absolute;
-  bottom: 10px; /* slight lift so it's not visually cut off */
-  left: 50%;
-  transform: translateX(-50%); /* center horizontally */
+  margin-top: auto; /* push footer to the bottom if space is left */
   padding: 8px 20px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(5px);
@@ -13,7 +10,10 @@
   border-radius: 8px;
   box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.1);
   z-index: 10;
+  text-align: center;
+  width: 100%;
 }
+
 
 
 
