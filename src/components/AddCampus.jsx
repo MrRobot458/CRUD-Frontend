@@ -5,7 +5,7 @@ import axios from "axios";
 export default function AddCampus() {
   async function addCampus(c, add, imgUrl, desc) {
     try {
-      await axios.post("http://localhost:8080/api/campuses", {
+      await axios.post("https://crud-backend-gilt.vercel.app/api/campuses", {
         name: c,
         address: add,
         imageUrl: imgUrl || undefined,

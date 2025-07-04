@@ -1,0 +1,61 @@
+.student-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  justify-items: center;
+}
+
+.student-card {
+  width: 220px;
+  min-height: 200px;
+  background: rgba(255, 255, 255, 0.1);  
+  backdrop-filter: blur(40px); 
+  padding: 10px;
+  border-radius: 0.5rem;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.25); 
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white; 
+}
+
+.student-card h2,
+.student-card p {
+  color: #000000;
+}
+
+.student-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.student-card-header p {
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.student-card-header-buttons {
+  display: flex;
+  padding-top: 10px;
+  gap: 0.3rem;
+  font-size: 20px;
+  padding: 5px;
+  margin: 10px;
+  text-align: center;
+}
+
+.student-card-image{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10%;
+    margin-top: 8px;
+}
+ 
+.delete-student{
+    font-size: 35px;
+}

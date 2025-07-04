@@ -1,0 +1,51 @@
+.campus-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  justify-items: center;
+}
+
+.campus-card {
+  width: 220px;
+  min-height: 200px;
+  background: rgba(255, 255, 255, 0.1);  
+  backdrop-filter: blur(40px); 
+  padding: 10px;
+  border-radius: 0.5rem;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.25); 
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white; 
+}
+
+.campus-card h2,
+.campus-card p {
+  color: #000000;
+}
+
+.campus-card-header {
+  text-align: center;
+  width: 100%;
+}
+
+.campus-card-header-buttons {
+  display: flex;
+  padding-top: 10px;
+  gap: 0.3rem;
+  font-size: 20px;
+}
+
+.campus-card-image{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10%;
+    margin-top: 8px;
+}
+
+.delete-campus{
+    font-size: 35px;
+}
