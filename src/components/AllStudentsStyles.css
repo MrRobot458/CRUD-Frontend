@@ -1,0 +1,22 @@
+.heading{
+    text-align: center;
+}
+.search-bar{
+margin-left: auto;
+margin-right: 0;
+}
+.all-students-body {
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    justify-content: center; 
+    width: 700px;
+    min-height: 50px;
+    padding: 0px;
+    backdrop-filter: blur(40px); 
+    border-radius: 0.5rem;
+    margin-left: 350px;
+    margin-right: 350px;
+    margin-top: 50px;
+    padding: 25px;
+}

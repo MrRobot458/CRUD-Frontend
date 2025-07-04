@@ -5,9 +5,11 @@ import axios from "axios";
 import "./CampusDetailsStyles.css";
 import StudentInCampusCard from "./StudentInCampusCard";
 
-const CampusDetails = () => {
+const CampusDetails = ({ students, fetchAllStudents }) => {
   const { campusId } = useParams();
   const [campus, setCampus] = useState(null);
+
+  const [selectedStudentId, setSelectedStudentId] = useState("");
 
   const fetchCampus = async () => {
     try {
@@ -16,13 +18,29 @@ const CampusDetails = () => {
       );
       setCampus(response.data);
     } catch (error) {
-      console.error("Error fetching tasks:", error);
+      console.error("Error fetching campus:", error);
     }
   };
 
   useEffect(() => {
     fetchCampus();
   }, [campusId]);
+
+  const handleAddStudentToCampus = async (event) => {
+    event.preventDefault();
+    if (!selectedStudentId) return;
+    try {
+      await axios.patch(
+        `https://crud-backend-gilt.vercel.app/api/students/${selectedStudentId}`,
+        { campusId: campus.id }
+      );
+      fetchAllStudents();
+      fetchCampus();
+      setSelectedStudentId("");
+    } catch (error) {
+      console.error("Error adding studen to campus:", error);
+    }
+  };
 
   if (!campus) return <div>Loading...</div>;
 
@@ -42,23 +60,43 @@ const CampusDetails = () => {
           <p>{campus.address}</p>
           <p>{campus.description}</p>
         </div>
-        </div>
-        <div className="students">
-            <h2>Attending Students</h2>
-          {campus.students.length > 0 ? (
-            campus.students.map((student) => (
-              <StudentInCampusCard
-                key={campus.students.id}
-                student={student}
-                fetchAllStudents={fetchCampus}
-                students={campus.students}
-              />
-            ))
-          ) : (
-            <p>It looks like no students have been added to this campus yet!</p>
-          )}
-        </div>
       </div>
+      <div className="add-student">
+        <form className="add-student" onSubmit={handleAddStudentToCampus}>
+          <label htmlFor="add-student-drop-down">Add a New Student</label>
+          <select 
+          id="add-student-drop-down"
+          value={selectedStudentId}
+          onChange={(e) => setSelectedStudentId(e.target.value)}
+          required
+          >
+            <option>Choose an option</option>
+            {students &&
+              students.map((student) => (
+                <option key={student.id} value={student.id}>
+                  ID:{student.id} | Name:{student.firstName} {student.lastName}
+                </option>
+              ))}
+          </select>
+          <button type="submit">Add Student</button>
+        </form>
+      </div>
+      <div className="students">
+        <h2>Attending Students</h2>
+        {campus.students.length > 0 ? (
+          campus.students.map((student) => (
+            <StudentInCampusCard
+              key={campus.students.id}
+              student={student}
+              fetchAllStudents={fetchCampus}
+              students={campus.students}
+            />
+          ))
+        ) : (
+          <p>It looks like no students have been added to this campus yet!</p>
+        )}
+      </div>
+    </div>
   );
 };
 

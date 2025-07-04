@@ -55,10 +55,10 @@ const App = () => {
         <Routes>
           <Route path = "/" element = {<LandingPage />} />
           <Route path = "/campuses" element = {<AllCampuses campuses={campuses} fetchAllCampuses={fetchAllCampuses} students={students} />} />
-          <Route path = "/campuses/:campusId" element = {< CampusDetails campuses={campuses} fetchAllCampuses={fetchAllCampuses} students={students}/>} />
+          <Route path = "/campuses/:campusId" element = {< CampusDetails campuses={campuses} fetchAllCampuses={fetchAllCampuses} students={students} fetchAllStudents={fetchAllStudents}/>} />
           <Route path = "/students" element = {< AllStudents students={students} fetchAllStudents={fetchAllStudents}/>} />
           <Route path = "/students/:studentId" element = {< StudentDetails/>} />
-          <Route path = "/add-student" element = {<AddStudent />} />
+          <Route path = "/add-student" element = {<AddStudent fetchAllStudents={fetchAllStudents}/>} />
           <Route path = "/students/:studentId/edit" element = {<EditStudent/>} />
         </Routes>
     </div>
