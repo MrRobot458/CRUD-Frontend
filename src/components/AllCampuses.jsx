@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CampusCard from "./CampusCard";
 import { Link, useLocation } from "react-router-dom";
+import "./AllCampuses.css"; 
 
 const AllCampuses = ({ campuses, fetchAllCampuses, students }) => {
   const location = useLocation();
@@ -17,10 +18,13 @@ const AllCampuses = ({ campuses, fetchAllCampuses, students }) => {
   }, [searchTerm, campuses]);
 
   return (
-    <div>
-      <Link to="/add-campus">
-        <h2 className="heading">Click Here to Add a New Campus🏫</h2>
-      </Link>
+    <div className="all-campuses-container">
+      <div className="add-campus-container">
+        <Link to="/add-campus" className="add-campus-button">
+          Add Campus <span className="plus-icon">+</span>
+        </Link>
+      </div>
+
       <div className="campus-grid">
         {filtered.length > 0 ? (
           filtered.map((campus) => (
@@ -32,7 +36,7 @@ const AllCampuses = ({ campuses, fetchAllCampuses, students }) => {
             />
           ))
         ) : (
-          <p>No Campuses found</p>
+          <p className="no-results-text">No Campuses found</p>
         )}
       </div>
     </div>
@@ -40,5 +44,4 @@ const AllCampuses = ({ campuses, fetchAllCampuses, students }) => {
 };
 
 export default AllCampuses;
-
 
