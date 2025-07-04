@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./AddStudentStyles.css";
 import axios from "axios";
-import { Link } from "react-router";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AddStudent({ fetchAllStudents }) {
   const navigate = useNavigate();
@@ -16,16 +15,14 @@ export default function AddStudent({ fetchAllStudents }) {
 
   async function getCampuses() {
     try {
-      const response = await axios.get(
-        "https://crud-backend-gilt.vercel.app/api/campuses"
-      );
+      const response = await axios.get("https://crud-backend-gilt.vercel.app/api/campuses");
       const campusList = response.data;
       setCampuses(campusList);
     } catch (error) {
       console.error(error.message);
-      setErrors([
-        ...errors,
-        "There was an issue retrieving campus data! You can still add the student, but without their campus!",
+      setErrors(prev => [
+        ...prev,
+        "There was an issue retrieving campus data! You can still add the student, but without their campus.",
       ]);
     }
   }
@@ -42,13 +39,14 @@ export default function AddStudent({ fetchAllStudents }) {
         campusId: campusId,
         gpa: Number(gpa),
       });
+
       fetchAllStudents();
       navigate("/students");
     } catch (error) {
-      console.error(error.message);
-      setErrors([
-        ...errors,
-        "Add student failed! Please make sure you input a proper email",
+      console.error("There was an issue adding the student: ", error.message);
+      setErrors(prev => [
+        ...prev,
+        "Add student failed! Please make sure you input a proper email.",
       ]);
     }
   }
@@ -68,56 +66,41 @@ export default function AddStudent({ fetchAllStudents }) {
 
   return (
     <div className="form-body">
-      <form className="form" action={onSubmit}>
+      <form
+        className="form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          onSubmit(formData);
+        }}
+      >
         <h1>Add Student</h1>
+
         <label className="label">
           First Name:
-          <input
-            required
-            className="input"
-            type="text"
-            name="firstName"
-            placeholder="John"
-          />
+          <input required className="input" type="text" name="firstName" placeholder="John" />
         </label>
+
         <label className="label">
           Last Name:
-          <input
-            required
-            className="input"
-            type="text"
-            name="lastName"
-            placeholder="Doe"
-          />
+          <input required className="input" type="text" name="lastName" placeholder="Doe" />
         </label>
+
         <label className="label">
           Email:
-          <input
-            required
-            className="input"
-            type="email"
-            name="email"
-            placeholder="johndoe@aol.com"
-          />
+          <input required className="input" type="email" name="email" placeholder="johndoe@aol.com" />
         </label>
+
         <label className="label">
           Image URL:
-          <input
-            className="input"
-            type="url"
-            name="imageUrl"
-            placeholder="https://example.com/image.jpg"
-          />
+          <input className="input" type="url" name="imageUrl" placeholder="https://example.com/image.jpg" />
         </label>
+
         <label className="label">
-          Campus(
+          Campus (
           <span className="tooltip-container">
-            <Link className="linkToCreate" to="/add-campus">
-              ?
-            </Link>
-            <div className="tooltip">
-              Don't see your Campus listed? Click here to add it!
-            </div>
+            <Link className="linkToCreate" to="/add-campus">?</Link>
+            <div className="tooltip">Don't see your Campus listed? Click here to add it!</div>
           </span>
           ):
           <select name="campus" id="campus" className="input">
@@ -129,6 +112,7 @@ export default function AddStudent({ fetchAllStudents }) {
             ))}
           </select>
         </label>
+
         <label className="label">
           GPA:
           <input
@@ -142,13 +126,15 @@ export default function AddStudent({ fetchAllStudents }) {
             placeholder="(optional: default is 0)"
           />
         </label>
+
         <ul className="errorsList">
           {errors.map((error, index) => (
-            <li className="error" key={new Date() + index}>
+            <li className="error" key={index}>
               {error}
             </li>
           ))}
         </ul>
+
         <button className="button">Add Student</button>
       </form>
     </div>

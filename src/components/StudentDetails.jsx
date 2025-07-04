@@ -1,6 +1,5 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router";
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import "./StudentDetailsStyles.css";
 
@@ -15,7 +14,7 @@ const StudentDetails = () => {
       );
       setStudent(response.data);
     } catch (error) {
-      console.error("Error fetching tasks:", error);
+      console.error("Error fetching student:", error);
     }
   };
 
@@ -47,7 +46,7 @@ const StudentDetails = () => {
           ) : (
             <div className="student-campus">
               <p>
-                Campus:
+                Campus:{" "}
                 <Link to={`/campuses/${student.campus.id}`}>
                   {student.campus.name}
                 </Link>
@@ -56,9 +55,9 @@ const StudentDetails = () => {
           )}
         </div>
         <div className="student-edit">
-            <Link to={`/students/${student.id}/edit`}>
-                <p>✏️ Edit</p>
-            </Link>
+          <Link to={`/students/${student.id}/edit`}>
+            <p>✏️ Edit</p>
+          </Link>
         </div>
       </div>
     </div>

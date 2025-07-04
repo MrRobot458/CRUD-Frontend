@@ -1,6 +1,5 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./CampusDetailsStyles.css";
 import StudentInCampusCard from "./StudentInCampusCard";
@@ -8,7 +7,6 @@ import StudentInCampusCard from "./StudentInCampusCard";
 const CampusDetails = ({ students, fetchAllStudents }) => {
   const { campusId } = useParams();
   const [campus, setCampus] = useState(null);
-
   const [selectedStudentId, setSelectedStudentId] = useState("");
 
   const fetchCampus = async () => {
@@ -34,11 +32,11 @@ const CampusDetails = ({ students, fetchAllStudents }) => {
         `https://crud-backend-gilt.vercel.app/api/students/${selectedStudentId}`,
         { campusId: campus.id }
       );
-      fetchAllStudents();
-      fetchCampus();
-      setSelectedStudentId("");
+      fetchAllStudents(); // Refresh all students
+      fetchCampus(); // Refresh this campus's data
+      setSelectedStudentId(""); // Reset dropdown
     } catch (error) {
-      console.error("Error adding studen to campus:", error);
+      console.error("Error adding student to campus:", error);
     }
   };
 
@@ -51,26 +49,23 @@ const CampusDetails = ({ students, fetchAllStudents }) => {
           <h1>Campus Details</h1>
         </div>
         <div className="campus-details">
-          <img
-            className="campus-image"
-            src={campus.imageUrl}
-            alt={campus.name}
-          />
+          <img className="campus-image" src={campus.imageUrl} alt={campus.name} />
           <h2>{campus.name}</h2>
           <p>{campus.address}</p>
           <p>{campus.description}</p>
         </div>
       </div>
+
       <div className="add-student">
         <form className="add-student" onSubmit={handleAddStudentToCampus}>
           <label htmlFor="add-student-drop-down">Add a New Student</label>
-          <select 
-          id="add-student-drop-down"
-          value={selectedStudentId}
-          onChange={(e) => setSelectedStudentId(e.target.value)}
-          required
+          <select
+            id="add-student-drop-down"
+            value={selectedStudentId}
+            onChange={(e) => setSelectedStudentId(e.target.value)}
+            required
           >
-            <option>Choose an option</option>
+            <option value="">Choose an option</option>
             {students &&
               students.map((student) => (
                 <option key={student.id} value={student.id}>
@@ -81,12 +76,13 @@ const CampusDetails = ({ students, fetchAllStudents }) => {
           <button type="submit">Add Student</button>
         </form>
       </div>
+
       <div className="students">
         <h2>Attending Students</h2>
-        {campus.students.length > 0 ? (
+        {campus.students && campus.students.length > 0 ? (
           campus.students.map((student) => (
             <StudentInCampusCard
-              key={campus.students.id}
+              key={student.id}
               student={student}
               fetchAllStudents={fetchCampus}
               students={campus.students}
