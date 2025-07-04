@@ -17,6 +17,7 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
+
       <NavLink to="/">Home</NavLink>
       <NavLink to="/campuses">Campuses</NavLink>
       <NavLink to="/students">Students</NavLink>
@@ -32,6 +33,7 @@ const NavBar = () => {
           className="search-bar"
         />
       </form>
+
     </nav>
   );
 };

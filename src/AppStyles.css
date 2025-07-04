@@ -31,6 +31,7 @@ body {
 }
 
 
+
 html, body, #root {
   height: 100%;
   margin: 0;
@@ -44,4 +45,5 @@ html, body, #root {
 .content {
   flex: 1; 
 }
+
 

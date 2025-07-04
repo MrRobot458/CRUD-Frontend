@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CampusCard from "./CampusCard";
 import { useLocation } from "react-router-dom";
 
+
 const AllCampuses = ({ campuses, fetchAllCampuses, students }) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -35,4 +36,5 @@ const AllCampuses = ({ campuses, fetchAllCampuses, students }) => {
 };
 
 export default AllCampuses;
+
 

@@ -44,7 +44,6 @@ const App = () => {
   return (
     <div className="app-container">
       <NavBar />
-
       <div className="content">
         <Routes>
           <Route path="/" element={<LandingPage />} />

@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import "./CampusDetailsStyles.css";
 
+
 const CampusDetails = ({ campuses, students }) => {
   const { campusId } = useParams();
   const campus = campuses.find((c) => c.id === Number(campusId));
@@ -28,5 +29,4 @@ const CampusDetails = ({ campuses, students }) => {
     </div>
   );
 };
-
 export default CampusDetails;
