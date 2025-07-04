@@ -15,8 +15,16 @@ const CampusCard = ({ campus, fetchAllCampuses, students }) => {
     }
   };
 
-  const studentCounter = (campus, students) =>
-    students.filter(student => student.campusId === campus.id).length;
+  // Preserve your teammate's original logic
+  const studentCounter = (campus, students) => {
+    let studentCount = 0;
+    for (let i = 0; i < students.length; i++) {
+      if (students[i].campusId === campus.id) {
+        studentCount += 1;
+      }
+    }
+    return studentCount;
+  };
 
   return (
     <div className="campus-card">

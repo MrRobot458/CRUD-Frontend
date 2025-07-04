@@ -27,15 +27,8 @@
 }
 
 .campus-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.campus-card-header p {
-  font-size: 1.5rem;
-  margin-left: 1rem;
-  cursor: pointer;
+  text-align: center;
+  width: 100%;
 }
 
 .campus-card-header-buttons {

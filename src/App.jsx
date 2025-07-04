@@ -11,8 +11,10 @@ import CampusDetails from "./components/CampusDetails";
 import AllStudents from "./components/AllStudents";
 import StudentDetails from "./components/StudentDetails";
 import AddStudent from "./components/AddStudent";
+import AddCampus from "./components/AddCampus";
+import EditStudent from "./components/EditStudent";
 import Footer from "./components/Footer";
-import SearchResults from "./components/SearchResults"; 
+import SearchResults from "./components/SearchResults";
 
 const App = () => {
   const [students, setStudents] = useState([]);
@@ -47,6 +49,7 @@ const App = () => {
       <div className="content">
         <Routes>
           <Route path="/" element={<LandingPage />} />
+
           <Route
             path="/campuses"
             element={
@@ -57,6 +60,7 @@ const App = () => {
               />
             }
           />
+
           <Route
             path="/campuses/:campusId"
             element={
@@ -64,9 +68,11 @@ const App = () => {
                 campuses={campuses}
                 fetchAllCampuses={fetchAllCampuses}
                 students={students}
+                fetchAllStudents={fetchAllStudents}
               />
             }
           />
+
           <Route
             path="/students"
             element={
@@ -76,10 +82,21 @@ const App = () => {
               />
             }
           />
-          <Route path="/students/:studentId" element={<StudentDetails />} />
-          <Route path="/add-student" element={<AddStudent />} />
 
-         
+          <Route path="/students/:studentId" element={<StudentDetails />} />
+
+          <Route
+            path="/add-student"
+            element={<AddStudent fetchAllStudents={fetchAllStudents} />}
+          />
+
+          <Route
+            path="/add-campus"
+            element={<AddCampus fetchAllCampuses={fetchAllCampuses} />}
+          />
+
+          <Route path="/students/:studentId/edit" element={<EditStudent />} />
+
           <Route
             path="/search"
             element={
@@ -93,7 +110,6 @@ const App = () => {
           />
         </Routes>
       </div>
-
       <Footer />
     </div>
   );

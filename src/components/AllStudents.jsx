@@ -1,27 +1,45 @@
 import React, { useState, useEffect } from "react";
 import StudentCard from "./StudentCard";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import "./AllStudentsStyles.css";
+import SearchBar from "./SearchBar";
 
 const AllStudents = ({ students, fetchAllStudents }) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const searchTerm = queryParams.get("search") || "";
+  const urlSearch = queryParams.get("search") || "";
 
-  const [filtered, setFiltered] = useState([]);
+  const [searchQuery, setSearchQuery] = useState(urlSearch);
+  const [filteredStudents, setFilteredStudents] = useState([]);
 
   useEffect(() => {
-    const filteredStudents = students.filter((student) => {
-      const fullName = `${student.firstName} ${student.lastName}`.toLowerCase();
-      return fullName.includes(searchTerm.toLowerCase());
+    const filtered = students.filter((student) => {
+      const studentValues = Object.values(student)
+        .filter((val) => typeof val === "string")
+        .join(" ")
+        .toLowerCase();
+      return studentValues.includes(searchQuery.toLowerCase());
     });
-    setFiltered(filteredStudents);
-  }, [searchTerm, students]);
+    setFilteredStudents(filtered);
+  }, [searchQuery, students]);
 
   return (
-    <div className="student-grid-wrapper">
+    <div>
+      <div className="all-students-body">
+        <Link to="/add-student">
+          <h2 className="heading">Click Here to Add a New Student👨‍🎓</h2>
+        </Link>
+        <SearchBar
+          className="search-bar"
+          query={searchQuery}
+          setQuery={setSearchQuery}
+          placeholder="Click Here to Search Students..."
+        />
+      </div>
+
       <div className="student-grid">
-        {filtered.length > 0 ? (
-          filtered.map((student) => (
+        {filteredStudents.length > 0 ? (
+          filteredStudents.map((student) => (
             <StudentCard
               key={student.id}
               student={student}
@@ -29,7 +47,7 @@ const AllStudents = ({ students, fetchAllStudents }) => {
             />
           ))
         ) : (
-          <p>No students found.</p>
+          <p>No Students found matching your search.</p>
         )}
       </div>
     </div>
@@ -37,5 +55,3 @@ const AllStudents = ({ students, fetchAllStudents }) => {
 };
 
 export default AllStudents;
-
-
