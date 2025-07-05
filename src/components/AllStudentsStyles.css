@@ -1,0 +1,38 @@
+.all-students-body {
+  display: flex;
+  justify-content: flex-end;          /* Push content to the right */
+  margin: 50px 50px 30px auto;        /* Top, Right, Bottom, Left margin */
+}
+
+.add-student-button {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border-radius: 8px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: background 0.3s, color 0.3s;
+  border: 2px solid rgba(255, 255, 255, 0.3);  /* 2px border */
+  backdrop-filter: blur(40px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.add-student-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.plus-sign {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-size: 1.5rem; /* Bigger plus sign */
+  transition: transform 0.4s ease-in-out;
+}
+
+.add-student-button:hover .plus-sign {
+  transform: rotate(180deg);
+}
+

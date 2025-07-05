@@ -1,0 +1,60 @@
+.student-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  justify-items: center;
+}
+
+.student-card {
+  width: 220px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(40px);
+  padding: 15px;
+  border-radius: 0.5rem;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.student-card h2 {
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.student-card-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10%;
+  margin-bottom: 12px;
+}
+
+.student-card-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 10px;
+}
+
+.card-link {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  text-align: center;
+}
+
+.card-link:hover {
+  color: #ddd;
+  text-decoration: underline;
+}

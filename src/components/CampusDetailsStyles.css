@@ -1,0 +1,35 @@
+.campus-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10%;
+  margin-top: 8px;
+}
+
+.center-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.campus-details-body {
+  width: 320px;
+  min-height: 300px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(40px);
+  padding: 10px;
+  border-radius: 1rem;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.25);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+

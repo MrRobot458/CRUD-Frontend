@@ -1,0 +1,56 @@
+.all-campuses-container {
+  padding: 1rem;
+}
+
+.add-campus-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 40px 50px 20px 0;
+}
+
+.add-campus-button {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.add-campus-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.plus-icon {
+  margin-left: 8px;
+  display: inline-block;
+  transition: transform 0.4s ease;
+}
+
+.add-campus-button:hover .plus-icon {
+  transform: rotate(180deg);
+}
+
+.no-results-text {
+  text-align: center;
+  color: white;
+  font-size: 1.1rem;
+  margin-top: 2rem;
+}
+
+/* Existing styles preserved */
+.campus-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  justify-items: center;
+}
+
