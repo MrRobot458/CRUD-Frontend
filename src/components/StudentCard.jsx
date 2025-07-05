@@ -25,30 +25,27 @@ const StudentCard = ({ student, fetchAllStudents }) => {
         <img className="student-card-image" src={student.imageUrl} alt={student.firstName} />
       </div>
 
-      <div className="student-card-header-buttons">
-        <Link to={`/students/${student.id}`}>
-          <p>🔎View Profile</p>
+      <div className="student-card-links">
+        <Link to={`/students/${student.id}`} className="card-link">
+          View Profile
         </Link>
 
         {student.campusId === null ? (
-          <Link to={`/students/${student.id}/edit`}>
-            <p>✏️Assign Campus</p>
+          <Link to={`/students/${student.id}/edit`} className="card-link">
+            Assign Campus
           </Link>
         ) : (
-          <div className="student-campus">
-            <Link to={`/campuses/${student.campusId}`}>
-              <p>🏫View Campus</p>
-            </Link>
-          </div>
+          <Link to={`/campuses/${student.campusId}`} className="card-link">
+            View Campus
+          </Link>
         )}
-      </div>
 
-      <div className="delete-student">
-        <p onClick={handleDeleteStudent}>🗑️</p>
+        <button className="card-link delete-button" onClick={handleDeleteStudent}>
+          Delete Student
+        </button>
       </div>
     </div>
   );
 };
 
 export default StudentCard;
-

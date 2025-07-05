@@ -8,44 +8,62 @@
 
 .campus-card {
   width: 220px;
-  min-height: 200px;
-  background: rgba(255, 255, 255, 0.1);  
-  backdrop-filter: blur(40px); 
-  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(40px);
+  padding: 15px;
   border-radius: 0.5rem;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.25); 
-  margin: 0;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white; 
-}
-
-.campus-card h2,
-.campus-card p {
-  color: #000000;
-}
-
-.campus-card-header {
+  color: white;
   text-align: center;
-  width: 100%;
 }
 
-.campus-card-header-buttons {
+.campus-card h2 {
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.campus-card-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10%;
+  margin-bottom: 12px;
+}
+
+.campus-card-count {
+  margin-bottom: 10px;
+}
+
+.campus-card-count p {
+  color: white;
+  font-size: 0.95rem;
+}
+
+.campus-card-links {
   display: flex;
-  padding-top: 10px;
-  gap: 0.3rem;
-  font-size: 20px;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 10px;
 }
 
-.campus-card-image{
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 10%;
-    margin-top: 8px;
+.card-link {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  text-align: center;
 }
 
-.delete-campus{
-    font-size: 35px;
+.card-link:hover {
+  color: #ddd;
+  text-decoration: underline;
 }

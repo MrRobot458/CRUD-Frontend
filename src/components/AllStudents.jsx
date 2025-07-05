@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import StudentCard from "./StudentCard";
 import { Link, useLocation } from "react-router-dom";
 import "./AllStudentsStyles.css";
-import SearchBar from "./SearchBar";
 
 const AllStudents = ({ students, fetchAllStudents }) => {
   const location = useLocation();
@@ -26,16 +25,11 @@ const AllStudents = ({ students, fetchAllStudents }) => {
   return (
     <div>
       <div className="all-students-body">
-        <Link to="/add-student">
-          <h2 className="heading">Click Here to Add a New Student👨‍🎓</h2>
-        </Link>
-        <SearchBar
-          className="search-bar"
-          query={searchQuery}
-          setQuery={setSearchQuery}
-          placeholder="Click Here to Search Students..."
-        />
-      </div>
+  <Link to="/add-student" className="add-student-button">
+    Add Student <span className="plus-sign">+</span>
+  </Link>
+</div>
+
 
       <div className="student-grid">
         {filteredStudents.length > 0 ? (

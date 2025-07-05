@@ -7,7 +7,6 @@ export default function AddStudent({ fetchAllStudents }) {
   const navigate = useNavigate();
   const [campuses, setCampuses] = useState([]);
   const [errors, setErrors] = useState([]);
-  const [campus, setCampus] = useState("");
 
   useEffect(() => {
     getCampuses();
@@ -78,22 +77,22 @@ export default function AddStudent({ fetchAllStudents }) {
 
         <label className="label">
           First Name:
-          <input required className="input" type="text" name="firstName" placeholder="John" />
+          <input required className="input" type="text" name="firstName" />
         </label>
 
         <label className="label">
           Last Name:
-          <input required className="input" type="text" name="lastName" placeholder="Doe" />
+          <input required className="input" type="text" name="lastName" />
         </label>
 
         <label className="label">
           Email:
-          <input required className="input" type="email" name="email" placeholder="johndoe@aol.com" />
+          <input required className="input" type="email" name="email" />
         </label>
 
         <label className="label">
           Image URL:
-          <input className="input" type="url" name="imageUrl" placeholder="https://example.com/image.jpg" />
+          <input className="input" type="url" name="imageUrl" />
         </label>
 
         <label className="label">
@@ -123,7 +122,6 @@ export default function AddStudent({ fetchAllStudents }) {
             min={0}
             max={4}
             defaultValue={0}
-            placeholder="(optional: default is 0)"
           />
         </label>
 
@@ -135,7 +133,7 @@ export default function AddStudent({ fetchAllStudents }) {
           ))}
         </ul>
 
-        <button className="button">Add Student</button>
+        <button className="button" type="submit">Add Student</button>
       </form>
     </div>
   );
