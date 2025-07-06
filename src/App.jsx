@@ -1,30 +1,126 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import axios from "axios";
 import "./AppStyles.css";
+
 import NavBar from "./components/NavBar";
-import { BrowserRouter as Router, Routes } from "react-router";
+import LandingPage from "./components/LandingPage";
+import AllCampuses from "./components/AllCampuses";
+import CampusDetails from "./components/CampusDetails";
+import AllStudents from "./components/AllStudents";
+import StudentDetails from "./components/StudentDetails";
+import AddStudent from "./components/AddStudent";
+import AddCampus from "./components/AddCampus";
+import EditStudent from "./components/EditStudent";
+import Footer from "./components/Footer";
+import SearchResults from "./components/SearchResults";
 
 const App = () => {
-  return (
-    <div>
-      <NavBar />
-      <div className="app">
-        <h1>Hello React!</h1>
-        <img className="react-logo" src="/react-logo.svg" alt="React Logo" />
+  const [students, setStudents] = useState([]);
+  const [campuses, setCampuses] = useState([]);
 
-        <Routes>{/* Currently, we don't have any routes defined */}</Routes>
+  async function fetchAllStudents() {
+    try {
+      const response = await axios.get("https://crud-backend-gilt.vercel.app/api/students/");
+      setStudents(response.data);
+    } catch (error) {
+      console.error("Error fetching students:", error);
+    }
+  }
+
+  async function fetchAllCampuses() {
+    try {
+      const response = await axios.get("https://crud-backend-gilt.vercel.app/api/campuses");
+      setCampuses(response.data);
+    } catch (error) {
+      console.error("Error fetching campuses:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchAllStudents();
+    fetchAllCampuses();
+  }, []);
+
+  return (
+    <div className="app-container">
+      <NavBar />
+      <div className="content">
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+
+          <Route
+            path="/campuses"
+            element={
+              <AllCampuses
+                campuses={campuses}
+                fetchAllCampuses={fetchAllCampuses}
+                students={students}
+              />
+            }
+          />
+
+          <Route
+            path="/campuses/:campusId"
+            element={
+              <CampusDetails
+                campuses={campuses}
+                fetchAllCampuses={fetchAllCampuses}
+                students={students}
+                fetchAllStudents={fetchAllStudents}
+              />
+            }
+          />
+
+          <Route
+            path="/students"
+            element={
+              <AllStudents
+                students={students}
+                fetchAllStudents={fetchAllStudents}
+              />
+            }
+          />
+
+          <Route path="/students/:studentId" element={<StudentDetails />} />
+
+          <Route
+            path="/add-student"
+            element={<AddStudent fetchAllStudents={fetchAllStudents} />}
+          />
+
+          <Route
+            path="/add-campus"
+            element={<AddCampus fetchAllCampuses={fetchAllCampuses} />}
+          />
+
+          <Route path="/students/:studentId/edit" element={<EditStudent />} />
+
+          <Route
+            path="/search"
+            element={
+              <SearchResults
+                students={students}
+                campuses={campuses}
+                fetchAllStudents={fetchAllStudents}
+                fetchAllCampuses={fetchAllCampuses}
+              />
+            }
+          />
+        </Routes>
       </div>
+      <Footer />
     </div>
   );
 };
 
-// We're using React Router to handle the navigation between pages.
-// It's important that the Router is at the top level of our app,
-// and that we wrap our entire app in it. With this in place, we can
-// declare Routes, Links, and use useful hooks like useNavigate.
 const root = createRoot(document.getElementById("root"));
 root.render(
   <Router>
     <App />
   </Router>
 );
+
+
+
