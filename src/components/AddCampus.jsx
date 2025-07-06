@@ -1,8 +1,11 @@
 import React from "react";
-import "./AddCampusStyles.css";
 import axios from "axios";
+import { useState } from "react";
+import "./AddCampusStyles.css";
 
 export default function AddCampus() {
+  const [error, setError] = useState("");
+
   async function addCampus(c, add, imgUrl, desc) {
     try {
       await axios.post("http://localhost:8080/api/campuses", {
@@ -13,6 +16,7 @@ export default function AddCampus() {
       });
     } catch (error) {
       console.error(error.message);
+      setError("There was an error adding the campus, please try again later!");
     }
   }
 
@@ -60,8 +64,9 @@ export default function AddCampus() {
       </label>
       <label className="label">
         Description:
-        <textarea className="input" name="description"></textarea>
+        <textarea className="input" name="description" />
       </label>
+      {error ? <p className="error">{error}</p> : null}
       <button className="button">Add Campus</button>
     </form>
   );
