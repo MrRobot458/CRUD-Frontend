@@ -4,14 +4,31 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 
 // Import CSS
-// import "./EditStudentStyles.css";
+import "./EditStudentStyles.css";
 
 const EditStudent = ({ student }) => {
     const navigate = useNavigate();
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const editStudent = async (newFirstName, newLastName, newEmail, newCampus, newImage, newGPA) => {
-        /***** FIX: FINISH THIS FUNCTION *****/
+        try {
+            const updateData = {};
+
+            if ((newFirstName !== undefined) && (newFirstName !== '')) updateData.name = newFirstName;
+            if ((newLastName !== undefined) && (newLastName !== '')) updateData.address = newLastName;
+            if ((newEmail !== undefined) && (newEmail !== '')) updateData.address = newEmail;
+            if ((newCampus !== undefined) && (newCampus !== '')) updateData.address = newCampus;
+            if ((newImage !== undefined) && (newImage !== '')) updateData.imageUrl = newImage;
+            if ((newGPA !== undefined) && (newGPA !== '')) updateData.description = newGPA;
+
+            if (Object.keys(updateData).length > 0)
+                await axios.patch(`https://crud-backend-gilt.vercel.app/api/students/${student.id}`, updateData);
+
+            navigate(`/students/${student.id}`);
+        } catch (error) {
+            console.error("Error editing student:", error);
+            alert("Failed to edit student information! Please try again.");
+        }
     }
 
     const handleSubmission = (e) => {
