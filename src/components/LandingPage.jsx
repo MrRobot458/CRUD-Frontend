@@ -1,6 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom"; // ✅ Fixed import
 import "./LandingPage.css";
-import { Link } from "react-router";
 
 const LandingPage = () => {
   return (
@@ -8,11 +8,12 @@ const LandingPage = () => {
       <div className="landing-bubble">
         <h1 className="landing-title">Welcome to CampusConnect</h1>
         <h3>Start your journey</h3>
-        <Link to="/campuses">
-          <p>Explore campuses</p>
+
+        <Link to="/campuses" className="landing-link">
+          Explore Campuses
         </Link>
-        <Link to="/students">
-          <p>Connect with students</p>
+        <Link to="/students" className="landing-link">
+          Connect with Students
         </Link>
       </div>
 
