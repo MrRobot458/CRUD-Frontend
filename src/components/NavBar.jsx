@@ -22,7 +22,9 @@ const NavBar = () => {
       <NavLink to="/campuses">Campuses</NavLink>
       <NavLink to="/students">Students</NavLink>
       <NavLink to="/faculty">Faculty</NavLink>
-      <NavLink to="/contact">Contact Us</NavLink>
+      <NavLink to="/contact">Contact Us</NavLink> 
+      <NavLink to="/Login">Log In </NavLink>
+      <NavLink to="/signup">Sign Up</NavLink>
 
       <form onSubmit={handleSearch} className="search-form">
         <input

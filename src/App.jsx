@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import "./AppStyles.css";
-
 import NavBar from "./components/NavBar";
 import LandingPage from "./components/LandingPage";
 import AllCampuses from "./components/AllCampuses";
@@ -17,7 +16,7 @@ import EditCampus from "./components/EditCampus";
 import Footer from "./components/Footer";
 import SearchResults from "./components/SearchResults";
 import Faculty from "./components/Faculty";
-
+import Login from "./components/login";
 
 const App = () => {
   const [students, setStudents] = useState([]);
@@ -93,7 +92,7 @@ const App = () => {
             element={<AddStudent fetchAllStudents={fetchAllStudents} />}
           />
           <Route path="/faculty" element={<Faculty />} />
-
+          <Route path="/login" element={<Login />} />
 
           <Route
             path="/add-campus"
