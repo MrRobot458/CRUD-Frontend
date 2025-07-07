@@ -16,6 +16,8 @@ import EditStudent from "./components/EditStudent";
 import EditCampus from "./components/EditCampus";
 import Footer from "./components/Footer";
 import SearchResults from "./components/SearchResults";
+import Faculty from "./components/Faculty";
+
 
 const App = () => {
   const [students, setStudents] = useState([]);
@@ -90,6 +92,8 @@ const App = () => {
             path="/add-student"
             element={<AddStudent fetchAllStudents={fetchAllStudents} />}
           />
+          <Route path="/faculty" element={<Faculty />} />
+
 
           <Route
             path="/add-campus"

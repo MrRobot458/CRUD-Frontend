@@ -60,7 +60,7 @@
 
 .search-bar:focus {
   outline: none;
-  border-color: #f7b500;  /* your yellow accent */
+  border-color: #f7b500; 
   background: rgba(255, 255, 255, 0.25);
   color: #000;
 }
