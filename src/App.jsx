@@ -13,6 +13,7 @@ import StudentDetails from "./components/StudentDetails";
 import AddStudent from "./components/AddStudent";
 import AddCampus from "./components/AddCampus";
 import EditStudent from "./components/EditStudent";
+import EditCampus from "./components/EditCampus";
 import Footer from "./components/Footer";
 import SearchResults from "./components/SearchResults";
 
@@ -96,6 +97,8 @@ const App = () => {
           />
 
           <Route path="/students/:studentId/edit" element={<EditStudent />} />
+
+          <Route path="/campuses/:campusId/edit" element={<EditCampus />} />
 
           <Route
             path="/search"
