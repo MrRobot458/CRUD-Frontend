@@ -1,93 +1,282 @@
-// Import libraries
-import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-
-// Import CSS
 import "./EditStudentStyles.css";
 
-const EditStudent = ({ student }) => {
-    const navigate = useNavigate();
-    const [isSubmitting, setIsSubmitting] = useState(false);
+const StudentDetails = () => {
+    const { studentId } = useParams();
+    const [student, setStudent] = useState(null);
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        imageUrl: '',
+        gpa: '',
+        campusId: null
+    });
+    const [isEditing, setIsEditing] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [campusesLoading, setCampusesLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [campusesList, setCampusesList] = useState([]);
 
-    const editStudent = async (newFirstName, newLastName, newEmail, newCampus, newImage, newGPA) => {
+    const fetchStudent = async () => {
+        setLoading(true);
+        setError(null);
         try {
-            const updateData = {};
-
-            if ((newFirstName !== undefined) && (newFirstName !== '')) updateData.name = newFirstName;
-            if ((newLastName !== undefined) && (newLastName !== '')) updateData.address = newLastName;
-            if ((newEmail !== undefined) && (newEmail !== '')) updateData.address = newEmail;
-            if ((newCampus !== undefined) && (newCampus !== '')) updateData.address = newCampus;
-            if ((newImage !== undefined) && (newImage !== '')) updateData.imageUrl = newImage;
-            if ((newGPA !== undefined) && (newGPA !== '')) updateData.description = newGPA;
-
-            if (Object.keys(updateData).length > 0)
-                await axios.patch(`https://crud-backend-gilt.vercel.app/api/students/${student.id}`, updateData);
-
-            alert("Successfully edited student details!");
-            navigate(`/students/${student.id}`);
-        } catch (error) {
-            console.error("Error editing student:", error);
-            alert("Failed to edit student details! Please try again.");
+            const response = await axios.get(
+                `https://crud-backend-gilt.vercel.app/api/students/${studentId}`
+            );
+            const studentData = response.data;
+            setStudent(studentData);
+            setFormData({
+                firstName: studentData.firstName || '',
+                lastName: studentData.lastName || '',
+                email: studentData.email || '',
+                imageUrl: studentData.imageUrl || '',
+                gpa: studentData.gpa || '',
+                campusId: studentData.campusId || null
+            });
+        } catch (err) {
+            setError("Failed to load student details.");
+        } finally {
+            setLoading(false);
         }
-    }
+    };
 
-    const handleSubmission = (e) => {
-        e.preventDefault();
-        setIsSubmitting(true);
+    const fetchAllCampuses = async () => {
+        setCampusesLoading(true);
+        try {
+            const response = await axios.get('https://crud-backend-gilt.vercel.app/api/campuses');
+            setCampusesList(response.data);
+        } catch (err) {
+        } finally {
+            setCampusesLoading(false);
+        }
+    };
 
-        const formData = new FormData(e.target);
-        const newFirstName = formData.get("newFirstName");
-        const newLastName = formData.get("newLastName");
-        const newEmail = formData.get("newEmail");
-        const newCampus = formData.get("newCampus");
-        const newImage = formData.get("newImage");
-        const newGPA = formData.get("newGPA");
+    useEffect(() => {
+        fetchStudent();
+    }, [studentId]);
 
-        editStudent(newFirstName, newLastName, newEmail, newCampus, newImage, newGPA)
-            .finally(() => setIsSubmitting(false));
-    }
+    useEffect(() => {
+        fetchAllCampuses();
+    }, []);
 
-    const handleCancellation = (e) => {
-        e.preventDefault();
-        navigate(`/students/${student.id}`);
-    }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        let newValue = value;
+
+        if (name === 'campusId') {
+            newValue = (value === 'null' || value === '') ? null : parseInt(value, 10);
+        }
+
+        setFormData(prevData => ({
+            ...prevData,
+            [name]: newValue
+        }));
+    };
+
+    const handleEditClick = () => {
+        setIsEditing(true);
+    };
+
+    const handleCancelClick = () => {
+        setIsEditing(false);
+        if (student) {
+            setFormData({
+                firstName: student.firstName || '',
+                lastName: student.lastName || '',
+                email: student.email || '',
+                imageUrl: student.imageUrl || '',
+                gpa: student.gpa || '',
+                campusId: student.campusId || null
+            });
+        }
+    };
+
+    const handleSaveClick = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const updateUrl = `https://crud-backend-gilt.vercel.app/api/students/${studentId}`;
+            await axios.patch(updateUrl, formData);
+            setIsEditing(false);
+            fetchStudent();
+        } catch (err) {
+            if (err.response) {
+                if (err.response.status === 404) {
+                    setError("Failed to save changes: Student not found or API endpoint incorrect.");
+                } else if (err.response.status === 405) {
+                    setError("Failed to save changes: Method not allowed. API might not support PATCH either.");
+                } else {
+                    setError(`Failed to save changes: ${err.response.data.message || err.response.statusText || 'Server Error'}`);
+                }
+            } else if (err.request) {
+                setError("Failed to save changes: No response from server.");
+            } else {
+                setError(`Failed to save changes: ${err.message}`);
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (loading || campusesLoading) return <div className="text-center text-lg py-8">Loading student details and campuses...</div>;
+    if (error) return <div className="text-center text-lg py-8 text-red-500">{error}</div>;
+    if (!student) return <div className="text-center text-lg py-8">Student not found.</div>;
 
     return (
-        <div className="edit-student">
-            <form className="edit-student-form" onSubmit={handleSubmission}>
-                <h2 className="form-heading">Edit Student</h2>
-                <div className="current-section">
-                    <h3 className="current-heading">Current Details</h3>
-                    <div className="current-details">
-                        { /***** FIX: CURRENT DETAILS GO HERE *****/}
-                    </div>
+        <div className="center-container">
+            <div className="student-details-body">
+                <div className="heading">
+                    <h1>Student Details</h1>
                 </div>
-                <div className="new-section">
-                    <h3 className="new-heading">New Details</h3>
-                    <div className="new-details">
-                        { /***** FIX: FORM INPUTS GO HERE *****/}
-                    </div>
+                <div>
+                    <img
+                        className="student-image"
+                        src={formData.imageUrl || 'https://placehold.co/200x200/cccccc/000000?text=No+Image'}
+                        alt={`${formData.firstName} ${formData.lastName}`}
+                        onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/200x200/cccccc/000000?text=Image+Error'; }}
+                    />
+                    {isEditing ? (
+                        <>
+                            <label htmlFor="firstName" className="input-label">First Name:</label>
+                            <input
+                                type="text"
+                                name="firstName"
+                                id="firstName"
+                                value={formData.firstName}
+                                onChange={handleChange}
+                                className="input-field"
+                                placeholder="First Name"
+                            />
+                            <label htmlFor="lastName" className="input-label">Last Name:</label>
+                            <input
+                                type="text"
+                                name="lastName"
+                                id="lastName"
+                                value={formData.lastName}
+                                onChange={handleChange}
+                                className="input-field"
+                                placeholder="Last Name"
+                            />
+                        </>
+                    ) : (
+                        <h2>{`${student.firstName} ${student.lastName}`}</h2>
+                    )}
+
+                    {isEditing ? (
+                        <>
+                            <label htmlFor="gpa" className="input-label">GPA:</label>
+                            <input
+                                type="number"
+                                name="gpa"
+                                id="gpa"
+                                value={formData.gpa}
+                                onChange={handleChange}
+                                step="0.01"
+                                min="0.00"
+                                max="4.00"
+                                className="input-field"
+                                placeholder="GPA"
+                            />
+                        </>
+                    ) : (
+                        <p>GPA: {student.gpa}</p>
+                    )}
+
+                    {isEditing ? (
+                        <>
+                            <label htmlFor="email" className="input-label">E-mail:</label>
+                            <input
+                                type="email"
+                                name="email"
+                                id="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                className="input-field"
+                                placeholder="Email"
+                            />
+                        </>
+                    ) : (
+                        <p>E-mail: {student.email}</p>
+                    )}
+
+                    {isEditing && (
+                        <div > {/* Removed flex and mt-2 */}
+                            <label htmlFor="imageUrl" >Image URL:</label> {/* Removed text-sm font-semibold mb-1 */}
+                            <input
+                                type="text"
+                                id="imageUrl"
+                                name="imageUrl"
+                                value={formData.imageUrl}
+                                onChange={handleChange}
+                                className="input-field"
+                                placeholder="Image URL"
+                            />
+                        </div>
+                    )}
                 </div>
-                <div className="edit-form-buttons">
-                    <button
-                        className="cancel-btn"
-                        type="button"
-                        onClick={handleCancellation}
-                    >
-                        Cancel
-                    </button>
-                    <button
-                        className="edit-btn"
-                        type="submit"
-                        disabled={isSubmitting}
-                    >
-                        {isSubmitting ? "Saving..." : "Submit Changes"}
-                    </button>
+
+                <div>
+                    {isEditing ? (
+                        <div > {/* Removed flex and mt-4 */}
+                            <label htmlFor="campusId" >Assign Campus:</label> {/* Removed text-sm font-semibold mb-1 */}
+                            <select
+                                id="campusId"
+                                name="campusId"
+                                value={formData.campusId || 'null'}
+                                onChange={handleChange}
+                                className="input-field p-2 border rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            >
+                                <option value="null">-- Unassign Campus --</option>
+                                {campusesList.map(campus => (
+                                    <option key={campus.id} value={campus.id}>
+                                        {campus.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    ) : (
+                        student.campusId === null ? (
+                            <p>It looks like this student is not assigned to a campus yet!</p>
+                        ) : (
+                            <div className="student-campus">
+                                <p>
+                                    Campus:{" "}
+                                    {student.campus ? (
+                                        <Link to={`/campuses/${student.campus.id}`}>
+                                            {student.campus.name}
+                                        </Link>
+                                    ) : (
+                                        "N/A"
+                                    )}
+                                </p>
+                            </div>
+                        )
+                    )}
                 </div>
-            </form>
+
+                <div className="student-actions">
+                    {!isEditing ? (
+                        <button onClick={handleEditClick} className="action-button edit-button">
+                            ✏️ Edit
+                        </button>
+                    ) : (
+                        <>
+                            <button onClick={handleCancelClick} className="action-button cancel-button">
+                                Cancel
+                            </button>
+                            <button onClick={handleSaveClick} className="action-button save-button">
+                                Save Changes
+                            </button>
+                        </>
+                    )}
+                </div>
+            </div>
         </div>
     );
 };
 
-export default EditStudent;
+export default StudentDetails;
