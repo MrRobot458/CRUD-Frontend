@@ -4,6 +4,8 @@
   object-fit: cover;
   border-radius: 10%;
   margin-top: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .center-container {
@@ -14,6 +16,7 @@
   padding: 10px;
   flex-direction: column;
   margin: 10px;
+  box-sizing: border-box;
 }
 
 .campus-details-body {
@@ -31,5 +34,195 @@
   align-items: center;
   text-align: center;
   color: white;
+  margin-bottom: 20px;
 }
 
+.heading {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.campus-details {
+  margin-bottom: 20px;
+}
+
+.campus-details h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.campus-details p {
+  font-size: 1rem;
+  color: white;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.input-label {
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.textarea-field {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.campus-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.action-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+}
+
+.edit-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.cancel-button {
+  background-color: #6c757d;
+  color: white;
+}
+
+.cancel-button:hover {
+  background-color: #5a6268;
+}
+
+.save-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.save-button:hover {
+  background-color: #218838;
+}
+
+.add-student {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(40px);
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+  margin-bottom: 20px;
+  text-align: center;
+  color: white;
+}
+
+.add-student-form {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+}
+
+.add-student-form label {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.add-student-form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.add-student-form button.add-student-button {
+  background-color: #ffc107;
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-student-form button.add-student-button:hover {
+  background-color: #e0a800;
+  transform: translateY(-2px);
+}
+
+.students {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(40px);
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+  margin-bottom: 20px;
+  text-align: center;
+  color: white;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
+  gap: 20px;
+  justify-items: center; 
+}
+
+.students h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: white; 
+  margin-bottom: 20px;
+  grid-column: 1 / -1; 
+}
+
+.students p {
+  font-size: 1rem;
+  color: white; 
+  grid-column: 1 / -1; 
+}
