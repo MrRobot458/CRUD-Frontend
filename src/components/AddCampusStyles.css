@@ -1,91 +1,32 @@
-/* Center the form in viewport */
-.form {
-  width: 400px;
-  margin: 80px auto;
-  padding: 30px 25px;
-  background: rgba(255, 255, 255, 0.05); /* very transparent */
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border-radius: 16px;
-  border: 1.5px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-  color: white;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+/* AddCampusStyles.css - ADD THIS TO THE VERY BOTTOM */
+
+place-autocomplete-element.campus-address-input {
+    /* VISUAL CUES - Make it impossible to miss */
+    background-color: rgba(255, 0, 0, 0.5) !important; /* Semi-transparent red */
+    border: 5px solid lime !important; /* Bright green border */
+    box-shadow: 0 0 20px yellow !important; /* Yellow glow */
+
+    /* INTERACTIVITY OVERRIDES - Force it to be clickable */
+    pointer-events: auto !important; /* CRITICAL: Ensure clicks are passed through */
+    z-index: 99999999 !important; /* Make it absolutely top-most */
+    position: relative !important; /* z-index needs a position */
+    opacity: 1 !important; /* Ensure it's not transparent */
+    visibility: visible !important; /* Ensure it's not hidden */
+
+    /* Ensure dimensions are reasonable */
+    width: 300px !important;
+    height: 40px !important;
+
+    /* Override any flex/float issues from parents */
+    display: block !important;
+    float: none !important;
 }
 
-/* Heading style */
-.form h1 {
-  font-weight: 700;
-  font-size: 2.2rem;
-  text-align: center;
-  margin-bottom: 20px;
-  color: white;
+/* Also target the internal input within the web component for good measure */
+place-autocomplete-element.campus-address-input::part(input) {
+    pointer-events: auto !important; /* Force internal input to be interactive */
+    color: black !important; /* Make internal text visible on red background */
+    background: transparent !important; /* Allow red background of host to show */
+    border: none !important;
+    outline: none !important;
 }
-
-/* Label style - use flex for label text and input */
-.label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  font-size: 1rem;
-  color: white;
-}
-
-/* Input and textarea styles */
-.input {
-  width: 240px;
-  padding: 8px 12px;
-  border-radius: 10px;
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-  font-family: inherit;
-}
-
-/* Textarea tweaks */
-textarea.input {
-  height: 80px;
-  resize: vertical;
-}
-
-/* Input focus effect */
-.input:focus {
-  outline: none;
-  border-color: #f6b93b;
-  background: rgba(255, 255, 255, 0.15);
-}
-
-/* Placeholder styling */
-.input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
-  font-style: italic;
-}
-
-/* Submit button style */
-.button {
-  align-self: center;
-  background: transparent;
-  border: 2px solid #f6b93b;
-  color: #f6b93b;
-  padding: 12px 40px;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  margin-top: 10px;
-  font-family: inherit;
-}
-
-/* Button hover */
-.button:hover {
-  background: #f6b93b;
-  color: #1e1e1e;
-}
-
