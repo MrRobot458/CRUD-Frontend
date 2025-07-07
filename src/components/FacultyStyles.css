@@ -1,0 +1,47 @@
+.faculty-page {
+  margin-top: 80px;
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+
+.faculty-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+.faculty-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  justify-items: center;
+}
+
+.faculty-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  border-radius: 20px;
+  padding: 20px;
+  max-width: 250px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.faculty-image {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.faculty-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.faculty-role {
+  font-size: 1rem;
+  color: #ddd;
+}
