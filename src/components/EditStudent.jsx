@@ -24,10 +24,11 @@ const EditStudent = ({ student }) => {
             if (Object.keys(updateData).length > 0)
                 await axios.patch(`https://crud-backend-gilt.vercel.app/api/students/${student.id}`, updateData);
 
+            alert("Successfully edited student details!");
             navigate(`/students/${student.id}`);
         } catch (error) {
             console.error("Error editing student:", error);
-            alert("Failed to edit student information! Please try again.");
+            alert("Failed to edit student details! Please try again.");
         }
     }
 
@@ -35,11 +36,21 @@ const EditStudent = ({ student }) => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        /***** FIX: FINISH THIS FUNCTION *****/
+        const formData = new FormData(e.target);
+        const newFirstName = formData.get("newFirstName");
+        const newLastName = formData.get("newLastName");
+        const newEmail = formData.get("newEmail");
+        const newCampus = formData.get("newCampus");
+        const newImage = formData.get("newImage");
+        const newGPA = formData.get("newGPA");
+
+        editStudent(newFirstName, newLastName, newEmail, newCampus, newImage, newGPA)
+            .finally(() => setIsSubmitting(false));
     }
 
     const handleCancellation = (e) => {
-        /***** FIX: FINISH THIS FUNCTION *****/
+        e.preventDefault();
+        navigate(`/students/${student.id}`);
     }
 
     return (
