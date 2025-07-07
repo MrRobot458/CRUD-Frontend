@@ -54,7 +54,7 @@ const StudentDetails = () => {
             </div>
           )}
         </div>
-        <div className="student-edit">
+        <div className="edit-button">
           <Link to={`/students/${student.id}/edit`}>
             <p>✏️ Edit</p>
           </Link>

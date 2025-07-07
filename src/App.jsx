@@ -84,7 +84,7 @@ const App = () => {
             }
           />
 
-          <Route path="/students/:studentId" element={<StudentDetails />} />
+          <Route path="/students/:studentId" element={<EditStudent />} />
 
           <Route
             path="/add-student"
@@ -95,10 +95,6 @@ const App = () => {
             path="/add-campus"
             element={<AddCampus fetchAllCampuses={fetchAllCampuses} />}
           />
-
-          <Route path="/students/:studentId/edit" element={<EditStudent />} />
-
-          <Route path="/campuses/:campusId/edit" element={<EditCampus />} />
 
           <Route
             path="/search"
